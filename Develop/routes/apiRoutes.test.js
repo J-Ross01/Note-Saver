@@ -3,12 +3,19 @@ const express = require('express');
 const apiRoutes = require('./apiRoutes');
 const fs = require('fs').promises;
 
-jest.mock('fs');
+jest.mock('fs', () => {
+    return {
+        promises: {
+            readFile: jest.fn(),
+            writefile: jest.fn(),
+        },
+    };
+});
 
 describe('API Routes', ()=> {
     let app;
 
-    beforeEacch(() => {
+    beforeEach(() => {
         app = express();
         app.use(express.json());
         app.use('/api', apiRoutes);
