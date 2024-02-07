@@ -14,6 +14,7 @@ describe('API Routes', ()=> {
     let app;
 
     beforeEach(() => {
+        jest.clearAllMocks();
         app = express();
         app.use(express.json());
         app.use('/api', apiRoutes);
@@ -62,4 +63,32 @@ describe('API Routes', ()=> {
         });
 
     });
+
+    describe('DELETE /notes/:id', () => {
+        it('should delete a note by id', async () => {
+          const mockNotes = [
+            { id: '1', title: 'Test Note 1', text: 'This is test note 1' },
+            { id: '2', title: 'Test Note 2', text: 'This is test note 2' }
+          ];
+      
+          fs.readFile.mockResolvedValue(JSON.stringify(mockNotes));
+          fs.writeFile.mockResolvedValue();
+      
+          const response = await request(app)
+          .delete('/api/notes/1');
+      
+          expect(response.statusCode).toBe(200);
+          expect(response.body).toEqual({ message: 'Note deleted successfully' });
+      
+          const expectedData = [mockNotes[1]]; 
+          const formattedData = JSON.stringify(expectedData, null, 2); 
+          expect(fs.writeFile).toHaveBeenCalledWith(
+            expect.any(String),
+            formattedData, 
+            'utf8'
+          );
+        });
+      });
+      
+      
 });
