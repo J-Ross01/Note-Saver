@@ -3,6 +3,7 @@ const express = require('express');
 const apiRoutes = require('./apiRoutes');
 const fs = require('fs').promises;
 
+// Mocks the file system module. 
 jest.mock('fs', () => ({
     promises: {
       readFile: jest.fn(),
@@ -10,9 +11,11 @@ jest.mock('fs', () => ({
     },
   }));
 
+// Describes the tests for the API routes. 
 describe('API Routes', ()=> {
     let app;
 
+    // Setup before each test. 
     beforeEach(() => {
         jest.clearAllMocks();
         app = express();
@@ -20,7 +23,10 @@ describe('API Routes', ()=> {
         app.use('/api', apiRoutes);
     });
 
+    // Tests the GET /notes route. 
     describe('GET /notes', () => {
+
+      // Tests for getting the note successfully. 
         it('should return all the notes', async () => {
             const mockNotes = [{id: '1', title: 'Test GET', text: 'This is a test note' }];
             fs.readFile.mockResolvedValue(JSON.stringify(mockNotes));
@@ -30,6 +36,7 @@ describe('API Routes', ()=> {
             expect(response.body).toEqual(mockNotes);
         });
 
+        // Tests for the handling of errors. 
         it('should handle routing errors', async () => {
             fs.readFile.mockRejectedValue(new Error('Error processing file'));
 
@@ -38,7 +45,10 @@ describe('API Routes', ()=> {
         });
     });
 
+    // Tests for POST /notes route. 
     describe('POST /notes', () => {
+
+        // Tests for successfully creating the note. 
         it('should create a note then retun it', async () => {
             const newNotes = {title: 'Test POST', text: 'This is a test note for POST' };
             const mockNotes = [];
@@ -64,7 +74,10 @@ describe('API Routes', ()=> {
 
     });
 
+    // Tests for DELETE /notes/:id. 
     describe('DELETE /notes/:id', () => {
+      
+        // Test for successfully deleting the note by an id. 
         it('should delete a note by id', async () => {
           const mockNotes = [
             { id: '1', title: 'Test Note 1', text: 'This is test note 1' },
