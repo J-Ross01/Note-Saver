@@ -36,14 +36,15 @@ npm test
 - `htmlRoutes.test.js`: Tests for HTML routes.
 
 ## Contributions
-- Contributions are welcomed by the community. 
+- Contributions are welcomed by the creator. 
 - Just clone the repository and push your commits to your personal branch. 
 
 ## Sources
 - Forked Starter Code: https://github.com/coding-boot-camp/miniature-eureka
 - Pattern used for routing with JSON: https://www.npmjs.com/package/json-routing
 - Foundation for server.js file: https://stackoverflow.com/questions/65068431/how-to-post-some-json-data-to-a-route-in-api
-- Pattern used for tesing riute files with express & jest: https://www.theodinproject.com/lessons/nodejs-testing-routes-and-controllers
+- Pattern used for tesing route files with express & jest: https://www.theodinproject.com/lessons/nodejs-testing-routes-and-controllers
+- Explanation on the UUID npm package:https://www.javatpoint.com/java-uuid
 
 ## License
 MIT - [NOTES](../../../../Downloads/MIT_License_2024_Jarrett_Delaney.txt)
