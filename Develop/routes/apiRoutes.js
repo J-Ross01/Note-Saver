@@ -28,7 +28,7 @@ router.get('/notes', async (req, res) => {
     }
 });
 
-// Route function to create a new note and handle any errors while doing so.. 
+// Route function to create a new note and handle any errors while doing so.
 router.post('/notes', async (req, res) => {
     try {
         const notes = await readData();
@@ -41,7 +41,7 @@ router.post('/notes', async (req, res) => {
     }
 });
 
-// Route function to delete a note by its id and handle any errors while doing so.. 
+// Route function to delete a note by its id and handle any errors while doing so. 
 router.delete('/notes/:id', async (req, res) => {
     try {
         const notes = await readData();
